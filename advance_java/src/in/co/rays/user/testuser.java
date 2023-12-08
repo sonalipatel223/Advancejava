@@ -7,17 +7,42 @@ import java.util.List;
 public class testuser {
 	public static void main(String[] args)throws Exception {
 		//testadd();
-		testsearch();
+		//testsearch();
+		testsearch2();
 		
 		
 	}
 
-	private static void testsearch() throws Exception {
+	private static void testsearch2() throws Exception {
+		Userbean bean = new Userbean();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		bean.setDob(sdf.parse("2001-10-22"));
+		Usermodel model = new Usermodel();
+		List list = model.search2(bean);
+		Iterator it = list.iterator();
+		
+		while(it.hasNext()) {
+			bean = (Userbean) it.next();
+			
+			System.out.println(bean.getId());
+			System.out.println(bean.getF_name());
+			System.out.println(bean.getL_name());
+			System.out.println(bean.getLogin_id());
+			System.out.println(bean.getPassword());
+			System.out.println(bean.getDob());
+			System.out.println(bean.getAddress());
+			
+			
+			
+		}
+		}
+		
+		private static void testsearch() throws Exception {
 		//Userbean bean = new Userbean();
 		
-		usermodel model = new usermodel();
+		Usermodel model = new Usermodel();
 
-		List list = model.search12();
+		List list = model.search();
 
 		Iterator it = list.iterator();
 
@@ -48,8 +73,9 @@ public class testuser {
 		bean.setDob(sdf.parse("2004-5-1"));
 		bean.setAddress("khargone");
 		
-		usermodel model = new usermodel();
+		Usermodel model = new Usermodel();
 		model.add(bean);
+		
 		
 		
 	}

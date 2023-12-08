@@ -3,34 +3,37 @@ package in.co.rays.util;
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JDBCDataSource {
 	private static JDBCDataSource jds=null;
 
-	private ComboPooledDataSource ds = null;
+	private static ComboPooledDataSource cpds = null;
+	private static ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.bundle.system");
 
 	private JDBCDataSource() {
-				
-
+	   
+	
 			try {
 
-			ds = new ComboPooledDataSource();
+			cpds = new ComboPooledDataSource();
 
-			ds.setDriverClass("com.mysql.jdbc.Driver"); 
+			cpds.setDriverClass(rb.getString("driver")); 
 
-			ds.setJdbcUrl("jdbc:mysql://localhost/st_adv_java");
+			cpds.setJdbcUrl(rb.getString("url"));
+			
 
-			ds.setUser("root");
+			cpds.setUser(rb.getString("userName"));
 
-			ds.setPassword("root");
+			cpds.setPassword(rb.getString("password"));
 
-			ds.setInitialPoolSize (5);
+			cpds.setInitialPoolSize (Integer.parseInt(rb.getString("InitialPoolSize")));
 
-			ds.setAcquireIncrement (5);
+			cpds.setAcquireIncrement (Integer.parseInt(rb.getString("AcquireIncrement")));
 
-			ds.setMaxPoolSize (50);
+			cpds.setMaxPoolSize (Integer.parseInt(rb.getString("MaxPoolSize")));
 
 			} catch (PropertyVetoException e) {
 
@@ -53,7 +56,7 @@ public class JDBCDataSource {
 	public static Connection getConnection() {
 
 		try {
-			return getInstance().ds.getConnection();
+			return getInstance().cpds.getConnection();
 
 		} catch (SQLException e) {
 			return null;

@@ -7,13 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
-
-import jdk.internal.util.Preconditions;
-
-
-
-
 public class Marksheetmodal1 {
 	public void  add(Marksheetbean1 bean) throws Exception{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,14 +28,10 @@ public class Marksheetmodal1 {
 	}
 
 
-
-
-
-
-
-
 public List search(Marksheetbean1 bean , int page_no,int pagesaize) throws Exception {
 	Class.forName("com.mysql.cj.jdbc.Driver");
+	
+
 	Connection conn = DriverManager.getConnection("jdbc://mysql://localhost:3006/rays", "root", "root");
 	StringBuffer sql = new StringBuffer("select * from marksheet where 1=1");
 	
@@ -60,29 +49,7 @@ public List search(Marksheetbean1 bean , int page_no,int pagesaize) throws Excep
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	return null;
 	
 }
-
-
-
-
-
-
-
-
-
-
-
 }
